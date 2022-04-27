@@ -8,7 +8,7 @@ const tableRouter = {
   redirect: '/table/complex-table',
   name: 'Table',
   meta: {
-    title: 'Table',
+    title: '股票分析一览',
     icon: 'table'
   },
   children: [
