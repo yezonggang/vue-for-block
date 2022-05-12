@@ -58,31 +58,65 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/documentation',
+    path: '/basedata',
     component: Layout,
     children: [
       {
         path: 'index',
-        component: () => import('@/views/documentation/index'),
-        name: 'Documentation',
-        meta: { title: '股票基本数据', icon: 'documentation', affix: true }
+        component: () => import('@/views/table/basedata-table'),
+        name: 'stock',
+        meta: { title: '股票基本数据', icon: 'excel', affix: true }
       }
     ]
   },
   {
-    path: '/guide',
+    path: '/gusessdata',
     component: Layout,
-    redirect: '/guide/index',
     children: [
       {
         path: 'index',
-        component: () => import('@/views/guide/index'),
-        name: 'Guide',
-        meta: { title: '每日数据猜想', icon: 'guide', noCache: true }
+        component: () => import('@/views/table/guessdata-table'),
+        name: 'guess',
+        meta: { title: '每日数据猜想', icon: 'form', affix: true }
       }
     ]
   },
-  tableRouter
+  {
+    path: '/lifuer',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/table/lifuerdata-table'),
+        name: 'guess',
+        meta: { title: '利弗莫尔猜想', icon: 'form', affix: true }
+      }
+    ]
+  },
+  {
+    path: '/BargainHunting',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/table/barginpoint-table'),
+        name: 'guess',
+        meta: { title: 'Bargain Hunting', icon: 'form', affix: true }
+      }
+    ]
+  },
+  {
+    path: '/BuyingPoint',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/table/buyingpoint-table'),
+        name: 'guess',
+        meta: { title: 'BuyingPoint', icon: 'form', affix: true }
+      }
+    ]
+  }
 ]
 
 /**

@@ -19,8 +19,8 @@ const tableRouter = {
       meta: { title: 'Inline Edit' }
     },
     {
-      path: 'complex-table',
-      component: () => import('@/views/table/complex-table'),
+      path: 'basedata-table',
+      component: () => import('@/views/table/basedata-table'),
       name: 'ComplexTable',
       meta: { title: 'Complex Table' }
     }
