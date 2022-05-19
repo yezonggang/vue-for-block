@@ -8,6 +8,14 @@ export function fetchList(query) {
   })
 }
 
+export function fetchBaseList(query) {
+  return request({
+    url: '/stock/api_data',
+    method: 'get',
+    params: query
+  })
+}
+
 export function fetchArticle(id) {
   return request({
     url: '/vue-element-admin/article/detail',

@@ -1,6 +1,6 @@
 const Mock = require('mockjs')
-
 const List = []
+const baseList = []
 const count = 100
 
 const baseContent =
@@ -11,18 +11,11 @@ const image_uri =
 for (let i = 0; i < count; i++) {
   List.push(
     Mock.mock({
-      'id|1': ['10032', '10034', '10038', '10039'],
+      id: '@increment',
       timestamp: +Mock.Random.date('T'),
-      author: '@float(0, 100, 2, 2)',
+      author: '@first',
       reviewer: '@first',
-      'title|1': [
-        '平安银行',
-        '神州高铁	',
-        '深物业A	',
-        '沙河股份',
-        '五粮液',
-        '贵州茅台'
-      ],
+      title: '@title(5, 10)',
       content_short: 'mock data',
       content: baseContent,
       forecast: '@float(0, 100, 2, 2)',
@@ -34,6 +27,38 @@ for (let i = 0; i < count; i++) {
       pageviews: '@integer(300, 5000)',
       image_uri,
       platforms: ['a-platform']
+    })
+  )
+}
+
+for (let i = 0; i < count; i++) {
+  baseList.push(
+    Mock.mock({
+      code: '@increment',
+      timestamp: '@date("yyyy-MM-dd")',
+      'name|1': [
+        '平安银行',
+        '神州高铁	',
+        '深物业A	',
+        '沙河股份',
+        '五粮液',
+        '贵州茅台'
+      ],
+      latest_price: '@float(0, 100, 2, 2)',
+      quote_change: '@float(0, 100, 2, 2)',
+      ups_downs: '@float(0, 100, 2, 2)',
+      volume: '@float(0, 100, 2, 2)',
+      turnover: '@float(0, 100, 2, 2)',
+      amplitude: '@float(0, 100, 2, 2)',
+      high: '@float(0, 100, 2, 2)',
+      low: '@float(0, 100, 2, 2)',
+      open: '@float(0, 100, 2, 2)',
+      closed: '@float(0, 100, 2, 2)',
+      quantity_ratio: '@float(0, 100, 2, 2)',
+      turnover_rate: '@float(0, 100, 2, 2)',
+      pe_dynamic: '@float(0, 100, 2, 2)',
+      pb: '@float(0, 100, 2, 2)',
+      image_uri: '@String'
     })
   )
 }
@@ -71,6 +96,36 @@ module.exports = [
         code: 20000,
         data: {
           total: mockList.length,
+          items: pageList
+        }
+      }
+    }
+  },
+  {
+    url: '/vue-element-admin/article/baselist',
+    type: 'get',
+    response: (config) => {
+      const { name, code, page = 1, limit = 20, orderby } = config.query
+
+      let mockList = baseList.filter((item) => {
+        if (name && item.name.indexOf(name) < 0) return false
+        if (code && item.code.indexOf(code) < 0) return false
+        return true
+      })
+
+      if (orderby === '-code') {
+        mockList = mockList.reverse()
+      }
+
+      const pageList = mockList.filter(
+        (item, index) => index < limit * page && index >= limit * (page - 1)
+      )
+
+      return {
+        code: 20000,
+        data: {
+          draw: 0,
+          recordsTotal: mockList.length,
           items: pageList
         }
       }

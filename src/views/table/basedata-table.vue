@@ -2,21 +2,14 @@
   <div class="app-container">
     <div class="filter-container">
       <el-input
-        v-model="listQuery.title"
-        placeholder="日期"
-        style="width: 200px"
-        class="filter-item"
-        @keyup.enter.native="handleFilter"
-      />
-      <el-input
-        v-model="listQuery.title"
+        v-model="listQuery.code"
         placeholder="股票代码"
         style="width: 200px"
         class="filter-item"
         @keyup.enter.native="handleFilter"
       />
       <el-input
-        v-model="listQuery.title"
+        v-model="listQuery.name"
         placeholder="股票名称"
         style="width: 200px"
         class="filter-item"
@@ -55,19 +48,18 @@
     >
       <el-table-column
         label="股票代码"
-        prop="id"
+        prop="code"
         sortable="custom"
         align="center"
         width="120px"
-        :class-name="getSortClass('id')"
       >
         <template slot-scope="{ row }">
-          <span>{{ row.id }}</span>
+          <span>{{ row.code }}</span>
         </template>
       </el-table-column>
       <el-table-column label="日期" width="150px" align="center">
         <template slot-scope="{ row }">
-          <span>{{ row.timestamp | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
+          <span>{{ '20220516' | parseTime('{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
       <el-table-column label="查看股票" width="220px" align="center">
@@ -80,63 +72,162 @@
       <el-table-column label="股票名称" width="100px">
         <template slot-scope="{ row }">
           <span class="link-type" @click="handleUpdate(row)">{{
-            row.title
+            row.name
           }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="最新价" width="110px" align="center">
+      <el-table-column
+        label="最新价"
+        prop="latest_price"
+        width="90px"
+        align="center"
+        sortable="custom"
+      >
         <template slot-scope="{ row }">
-          <span>{{ row.author }}</span>
+          <span>{{ row.latest_price }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="涨跌幅" width="110px" align="center">
+      <el-table-column
+        label="涨跌幅"
+        prop="quote_change"
+        width="90px"
+        align="center"
+        sortable="custom"
+      >
         <template slot-scope="{ row }">
-          <span>{{ row.author }}</span>
+          <span>{{ row.quote_change }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="涨跌额" width="110px" align="center">
+      <el-table-column
+        label="涨跌额"
+        width="90px"
+        prop="ups_downs"
+        align="center"
+        sortable="custom"
+      >
         <template slot-scope="{ row }">
-          <span>{{ row.author }}</span>
+          <span>{{ row.ups_downs }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="成交量" width="110px" align="center">
+      <el-table-column
+        label="成交量"
+        width="90px"
+        prop="volume"
+        align="center"
+        sortable="custom"
+      >
         <template slot-scope="{ row }">
-          <span>{{ row.author }}</span>
+          <span>{{ row.volume }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="成交额" width="110px" align="center">
+      <el-table-column
+        label="成交额"
+        width="90px"
+        prop="turnover"
+        align="center"
+        sortable="custom"
+      >
         <template slot-scope="{ row }">
-          <span>{{ row.author }}</span>
+          <span>{{ row.turnover }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="振幅" width="110px" align="center">
+      <el-table-column
+        label="振幅"
+        width="90px"
+        prop="amplitude"
+        align="center"
+        sortable="custom"
+      >
         <template slot-scope="{ row }">
-          <span>{{ row.author }}</span>
+          <span>{{ row.amplitude }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="最高" width="110px" align="center">
+      <el-table-column
+        label="最高"
+        width="90px"
+        prop="high"
+        align="center"
+        sortable="custom"
+      >
         <template slot-scope="{ row }">
-          <span>{{ row.author }}</span>
+          <span>{{ row.high }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="最低" width="110px" align="center">
+      <el-table-column
+        label="最低"
+        width="90px"
+        prop="low"
+        align="center"
+        sortable="custom"
+      >
         <template slot-scope="{ row }">
-          <span>{{ row.author }}</span>
+          <span>{{ row.low }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="今开" width="110px" align="center">
+      <el-table-column
+        label="今开"
+        width="90px"
+        prop="open"
+        align="center"
+        sortable="custom"
+      >
         <template slot-scope="{ row }">
-          <span>{{ row.author }}</span>
+          <span>{{ row.open }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="昨收" width="110px" align="center">
+      <el-table-column
+        label="昨收"
+        width="90px"
+        prop="closed"
+        align="center"
+        sortable="custom"
+      >
         <template slot-scope="{ row }">
-          <span>{{ row.author }}</span>
+          <span>{{ row.closed }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="量比" width="110px" align="center">
+      <el-table-column
+        label="量比"
+        width="90px"
+        prop="quantity_ratio"
+        align="center"
+        sortable="custom"
+      >
         <template slot-scope="{ row }">
-          <span>{{ row.author }}</span>
+          <span>{{ row.quantity_ratio }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="换手率"
+        width="90px"
+        prop="turnover_rate"
+        align="center"
+        sortable="custom"
+      >
+        <template slot-scope="{ row }">
+          <span>{{ row.turnover_rate }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="动态盈亏"
+        width="90px"
+        prop="pe_dynamic"
+        align="center"
+        sortable="custom"
+      >
+        <template slot-scope="{ row }">
+          <span>{{ row.pe_dynamic }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="市净率"
+        width="90px"
+        prop="pb"
+        align="center"
+        sortable="custom"
+      >
+        <template slot-scope="{ row }">
+          <span>{{ row.pb }}</span>
         </template>
       </el-table-column>
     </el-table>
@@ -146,140 +237,21 @@
       :total="total"
       :page.sync="listQuery.page"
       :limit.sync="listQuery.limit"
-      @pagination="getList"
+      @pagination="getBaseList"
     />
-
-    <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
-      <el-form
-        ref="dataForm"
-        :rules="rules"
-        :model="temp"
-        label-position="left"
-        label-width="70px"
-        style="width: 400px; margin-left: 50px"
-      >
-        <el-form-item label="Type" prop="type">
-          <el-select
-            v-model="temp.type"
-            class="filter-item"
-            placeholder="Please select"
-          >
-            <el-option
-              v-for="item in calendarTypeOptions"
-              :key="item.key"
-              :label="item.display_name"
-              :value="item.key"
-            />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="Date" prop="timestamp">
-          <el-date-picker
-            v-model="temp.timestamp"
-            type="datetime"
-            placeholder="Please pick a date"
-          />
-        </el-form-item>
-        <el-form-item label="Title" prop="title">
-          <el-input v-model="temp.title" />
-        </el-form-item>
-        <el-form-item label="Status">
-          <el-select
-            v-model="temp.status"
-            class="filter-item"
-            placeholder="Please select"
-          >
-            <el-option
-              v-for="item in statusOptions"
-              :key="item"
-              :label="item"
-              :value="item"
-            />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="Imp">
-          <el-rate
-            v-model="temp.importance"
-            :colors="['#99A9BF', '#F7BA2A', '#FF9900']"
-            :max="3"
-            style="margin-top: 8px"
-          />
-        </el-form-item>
-        <el-form-item label="Remark">
-          <el-input
-            v-model="temp.remark"
-            :autosize="{ minRows: 2, maxRows: 4 }"
-            type="textarea"
-            placeholder="Please input"
-          />
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false"> Cancel </el-button>
-        <el-button
-          type="primary"
-          @click="dialogStatus === 'create' ? createData() : updateData()"
-        >
-          Confirm
-        </el-button>
-      </div>
-    </el-dialog>
-
-    <el-dialog :visible.sync="dialogPvVisible" title="Reading statistics">
-      <el-table
-        :data="pvData"
-        border
-        fit
-        highlight-current-row
-        style="width: 100%"
-      >
-        <el-table-column prop="key" label="Channel" />
-        <el-table-column prop="pv" label="Pv" />
-      </el-table>
-      <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogPvVisible = false"
-          >Confirm</el-button
-        >
-      </span>
-    </el-dialog>
   </div>
 </template>
 
 <script>
-import { fetchList, fetchPv, createArticle, updateArticle } from '@/api/article'
+import { fetchBaseList } from '@/api/article'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 
-const calendarTypeOptions = [
-  { key: 'CN', display_name: 'China' },
-  { key: 'US', display_name: 'USA' },
-  { key: 'JP', display_name: 'Japan' },
-  { key: 'EU', display_name: 'Eurozone' }
-]
-
-// arr to obj, such as { CN : "China", US : "USA" }
-const calendarTypeKeyValue = calendarTypeOptions.reduce((acc, cur) => {
-  acc[cur.key] = cur.display_name
-  return acc
-}, {})
-
 export default {
-  name: 'ComplexTable',
+  name: 'BaseTable',
   components: { Pagination },
   directives: { waves },
-  filters: {
-    statusFilter(status) {
-      const statusMap = {
-        published: 'success',
-        draft: 'info',
-        deleted: 'danger'
-      }
-      return statusMap[status]
-    },
-    typeFilter(type) {
-      return calendarTypeKeyValue[type]
-    }
-  },
   data() {
     return {
       tableKey: 0,
@@ -289,65 +261,22 @@ export default {
       listQuery: {
         page: 1,
         limit: 20,
-        importance: undefined,
-        title: undefined,
-        type: undefined,
-        sort: '+id'
-      },
-      importanceOptions: [1, 2, 3],
-      calendarTypeOptions,
-      sortOptions: [
-        { label: 'ID Ascending', key: '+id' },
-        { label: 'ID Descending', key: '-id' }
-      ],
-      statusOptions: ['published', 'draft', 'deleted'],
-      showReviewer: false,
-      temp: {
-        id: undefined,
-        importance: 1,
-        remark: '',
-        timestamp: new Date(),
-        title: '',
-        type: '',
-        status: 'published'
-      },
-      dialogFormVisible: false,
-      dialogStatus: '',
-      textMap: {
-        update: 'Edit',
-        create: 'Create'
-      },
-      dialogPvVisible: false,
-      pvData: [],
-      rules: {
-        type: [
-          { required: true, message: 'type is required', trigger: 'change' }
-        ],
-        timestamp: [
-          {
-            type: 'date',
-            required: true,
-            message: 'timestamp is required',
-            trigger: 'change'
-          }
-        ],
-        title: [
-          { required: true, message: 'title is required', trigger: 'blur' }
-        ]
+        name: undefined,
+        code: undefined,
+        orderby: '+quote_change'
       },
       downloadLoading: false
     }
   },
   created() {
-    this.getList()
+    this.getBaseList()
   },
   methods: {
-    getList() {
+    getBaseList() {
       this.listLoading = true
-      fetchList(this.listQuery).then((response) => {
+      fetchBaseList(this.listQuery).then((response) => {
         this.list = response.data.items
-        this.total = response.data.total
-
+        this.total = response.data.recordsTotal
         // Just to simulate the time of the request
         setTimeout(() => {
           this.listLoading = false
@@ -356,108 +285,17 @@ export default {
     },
     handleFilter() {
       this.listQuery.page = 1
-      this.getList()
-    },
-    handleModifyStatus(row, status) {
-      this.$message({
-        message: '操作Success',
-        type: 'success'
-      })
-      row.status = status
+      this.getBaseList()
     },
     sortChange(data) {
       const { prop, order } = data
-      if (prop === 'id') {
-        this.sortByID(order)
-      }
-    },
-    sortByID(order) {
       if (order === 'ascending') {
-        this.listQuery.sort = '+id'
+        this.listQuery.orderby = '+' + prop
       } else {
-        this.listQuery.sort = '-id'
+        this.listQuery.orderby = '-' + prop
       }
+      console.log(this.listQuery.orderby)
       this.handleFilter()
-    },
-    resetTemp() {
-      this.temp = {
-        id: undefined,
-        importance: 1,
-        remark: '',
-        timestamp: new Date(),
-        title: '',
-        status: 'published',
-        type: ''
-      }
-    },
-    handleCreate() {
-      this.resetTemp()
-      this.dialogStatus = 'create'
-      this.dialogFormVisible = true
-      this.$nextTick(() => {
-        this.$refs['dataForm'].clearValidate()
-      })
-    },
-    createData() {
-      this.$refs['dataForm'].validate((valid) => {
-        if (valid) {
-          this.temp.id = parseInt(Math.random() * 100) + 1024 // mock a id
-          this.temp.author = 'vue-element-admin'
-          createArticle(this.temp).then(() => {
-            this.list.unshift(this.temp)
-            this.dialogFormVisible = false
-            this.$notify({
-              title: 'Success',
-              message: 'Created Successfully',
-              type: 'success',
-              duration: 2000
-            })
-          })
-        }
-      })
-    },
-    handleUpdate(row) {
-      this.temp = Object.assign({}, row) // copy obj
-      this.temp.timestamp = new Date(this.temp.timestamp)
-      this.dialogStatus = 'update'
-      this.dialogFormVisible = true
-      this.$nextTick(() => {
-        this.$refs['dataForm'].clearValidate()
-      })
-    },
-    updateData() {
-      this.$refs['dataForm'].validate((valid) => {
-        if (valid) {
-          const tempData = Object.assign({}, this.temp)
-          tempData.timestamp = +new Date(tempData.timestamp) // change Thu Nov 30 2017 16:41:05 GMT+0800 (CST) to 1512031311464
-          updateArticle(tempData).then(() => {
-            const index = this.list.findIndex((v) => v.id === this.temp.id)
-            this.list.splice(index, 1, this.temp)
-            this.dialogFormVisible = false
-            this.$notify({
-              title: 'Success',
-              message: 'Update Successfully',
-              type: 'success',
-              duration: 2000
-            })
-          })
-        }
-      })
-    },
-    handleDelete(row, index) {
-      this.$notify({
-        title: 'Success',
-        message: 'Delete Successfully',
-        type: 'success',
-        duration: 2000
-      })
-      this.list.splice(index, 1)
-    },
-    handleFetchPv(pv) {
-      fetchPv(pv).then((response) => {
-        this.pvData = response.data.pvData
-        this.dialogPvVisible = true
-      })
     },
     handleDownload() {
       this.downloadLoading = true
@@ -483,11 +321,10 @@ export default {
           }
         })
       )
-    },
+    } /* ,
     getSortClass: function (key) {
-      const sort = this.listQuery.sort
-      return sort === `+${key}` ? 'ascending' : 'descending'
-    }
+      return this.listQuery.orderBy === `+${key}` ? 'ascending' : 'descending'
+    }*/
   }
 }
 </script>
