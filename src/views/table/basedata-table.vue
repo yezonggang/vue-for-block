@@ -51,29 +51,42 @@
         prop="code"
         sortable="custom"
         align="center"
-        width="120px"
+        width="110px"
       >
         <template slot-scope="{ row }">
           <span>{{ row.code }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="日期" width="150px" align="center">
+      <el-table-column label="日期" width="100px" align="center">
         <template slot-scope="{ row }">
-          <span>{{ '20220516' | parseTime('{y}-{m}-{d}') }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="查看股票" width="220px" align="center">
-        <template slot-scope="{ row }">
-          <el-button size="mini" @click="handleUpdate(row)">东财</el-button>
-          <el-button size="mini" @click="handleUpdate(row)">指标</el-button>
-          <el-button size="mini" @click="handleUpdate(row)">东研</el-button>
+          <span>{{ row.date }}</span>
         </template>
       </el-table-column>
       <el-table-column label="股票名称" width="100px">
         <template slot-scope="{ row }">
-          <span class="link-type" @click="handleUpdate(row)">{{
+          <span>{{ row.name }}</span>
+          <!--           <span class="link-type" @click="handleUpdate(row)">{{
             row.name
-          }}</span>
+          }}</span> -->
+        </template>
+      </el-table-column>
+      <el-table-column label="查看股票" width="180px" align="center">
+        <template slot-scope="{ row }">
+          <el-link
+            key="dongcai"
+            type="success"
+            :href="row.dongcai_URL"
+            target="_blank"
+            >财报分析</el-link
+          >
+          |
+          <el-link
+            key="dongyan"
+            type="warning"
+            :href="row.dongyan_URL"
+            target="_blank"
+            >股东研究</el-link
+          >
         </template>
       </el-table-column>
       <el-table-column
@@ -276,6 +289,7 @@ export default {
       this.listLoading = true
       fetchBaseList(this.listQuery).then((response) => {
         this.list = response.data.items
+        console.log(response.data.recordsTotal)
         this.total = response.data.recordsTotal
         // Just to simulate the time of the request
         setTimeout(() => {
