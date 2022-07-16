@@ -31,6 +31,7 @@ module.exports = {
   lintOnSave: false,
   productionSourceMap: false,
   devServer: {
+    host: '127.0.0.1',
     port: port,
     open: true,
     overlay: {
@@ -39,10 +40,13 @@ module.exports = {
     },
     proxy: {
       [process.env.VUE_APP_BASE_API]: {
-        target: 'http://127.0.0.1:9904',
-        ws: true,
-        changeOrigin: true,
-        pathRewrite: { ['^' + process.env.VUE_APP_BASE_API]: '' }
+        //代理
+        ws: false, // 这里把ws代理给关闭
+        target: 'http://127.0.0.1:8700/', //目标接口域名
+        changeOrigin: true, //是否跨域
+        pathRewrite: {
+          ['^' + process.env.VUE_APP_BASE_API]: '' //重写接口
+        }
       }
     }
     //before: require('./mock/mock-server.js')
