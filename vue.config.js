@@ -42,7 +42,7 @@ module.exports = {
       [process.env.VUE_APP_BASE_API]: {
         //代理
         ws: false, // 这里把ws代理给关闭
-        target: 'http://127.0.0.1:8700/', //目标接口域名
+        target: 'http://127.0.0.1:8701/', //目标接口域名
         changeOrigin: true, //是否跨域
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: '' //重写接口
