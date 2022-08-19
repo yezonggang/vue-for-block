@@ -68,7 +68,7 @@ export const constantRoutes = [
         meta: { title: 'demo表格', icon: 'excel', affix: true }
       }
     ]
-  }, */
+  }, 
   {
     path: '/basedata',
     component: Layout,
@@ -80,7 +80,8 @@ export const constantRoutes = [
         meta: { title: '股票基本数据', icon: 'excel', affix: true }
       }
     ]
-  } /* 
+  } 
+  
   {
     path: '/gusessdata',
     component: Layout,
@@ -92,37 +93,37 @@ export const constantRoutes = [
         meta: { title: '每日数据猜想', icon: 'form', affix: true }
       }
     ]
-  },
+  }*/
   {
     path: '/table',
     component: Layout,
     //redirect: '/table/complex-table',
     name: 'Table',
     meta: {
-      title: '股票分析一览',
+      title: '权限控制',
       icon: 'table'
     },
     children: [
       {
         path: '/lifuer',
-        component: () => import('@/views/table/lifuerdata-table'),
+        component: () => import('@/views/table/user-table'),
         name: 'guess',
-        meta: { title: '利弗莫尔猜想', icon: 'form', affix: true }
+        meta: { title: '用户管理', icon: 'form', affix: true }
       },
       {
         path: '/BargainHunting',
-        component: () => import('@/views/table/barginpoint-table'),
+        component: () => import('@/views/table/role-table'),
         name: 'guess',
-        meta: { title: 'Bargain Hunting', icon: 'form', affix: true }
+        meta: { title: '角色管理', icon: 'form', affix: true }
       },
       {
         path: '/BuyingPoint',
-        component: () => import('@/views/table/buyingpoint-table'),
+        component: () => import('@/views/table/inline-edit-table'),
         name: 'guess',
-        meta: { title: 'BuyingPoint', icon: 'form', affix: true }
+        meta: { title: '权限管理', icon: 'form', affix: true }
       }
     ]
-  } */
+  }
 ]
 
 /**
