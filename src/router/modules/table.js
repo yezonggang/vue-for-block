@@ -14,7 +14,7 @@ const tableRouter = {
   children: [
     {
       path: 'inline-edit-table',
-      component: () => import('@/views/table/inline-edit-table'),
+      component: () => import('@/views/table/basedata-table'),
       name: 'InlineEditTable',
       meta: { title: 'Inline Edit' }
     },

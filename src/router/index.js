@@ -118,7 +118,7 @@ export const constantRoutes = [
       },
       {
         path: '/BuyingPoint',
-        component: () => import('@/views/table/inline-edit-table'),
+        component: () => import('@/views/table/user-role'),
         name: 'guess',
         meta: { title: '权限管理', icon: 'form', affix: true }
       }

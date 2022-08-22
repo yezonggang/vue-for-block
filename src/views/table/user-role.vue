@@ -27,17 +27,7 @@
       >
         搜索
       </el-button>
-      <el-button
-        class="filter-item"
-        style="margin-left: 10px"
-        type="primary"
-        icon="el-icon-edit"
-        @click="handleCreate"
-      >
-        新增
-      </el-button>
     </div>
-
     <el-table
       :key="tableKey"
       v-loading="listLoading"
@@ -48,34 +38,18 @@
       @sort-change="sortChange"
     >
       <el-table-column
-        label="角色ID"
-        prop="id"
+        label="用户名"
+        prop="username"
         sortable="custom"
         align="center"
         min-width="100"
-        :class-name="getSortClass('id')"
       >
       </el-table-column>
       <el-table-column
         label="角色名"
         align="center"
         min-width="100px"
-        prop="name"
-      >
-      </el-table-column>
-      <el-table-column
-        label="code"
-        align="center"
-        min-width="100px"
-        prop="code"
-      >
-      </el-table-column>
-      <el-table-column
-        label="描述"
-        align="center"
-        min-width="100"
-        prop="des"
-        class-name="small-padding fixed-width"
+        prop="rolename"
       >
       </el-table-column>
       <el-table-column
@@ -86,15 +60,7 @@
       >
         <template slot-scope="{ row, $index }">
           <el-button type="primary" size="mini" @click="handleUpdate(row)">
-            修改
-          </el-button>
-          <el-button
-            v-if="row.status != 'deleted'"
-            size="mini"
-            type="danger"
-            @click="handleDelete(row, $index)"
-          >
-            删除
+            修改绑定
           </el-button>
         </template>
       </el-table-column>
@@ -119,14 +85,11 @@
         label-width="70px"
         style="width: 400px; margin-left: 50px"
       >
-        <el-form-item label="角色名" prop="name">
-          <el-input v-model="temp.name" />
+        <el-form-item label="用户名" prop="username">
+          <el-input v-model="temp.username" />
         </el-form-item>
-        <el-form-item label="code" prop="des">
-          <el-input v-model="temp.code" />
-        </el-form-item>
-        <el-form-item label="描述" prop="des">
-          <el-input v-model="temp.des" />
+        <el-form-item label="角色" prop="rolename">
+          <el-input v-model="temp.rolename" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -155,7 +118,7 @@ export default {
   data() {
     return {
       tableKey: 0,
-      columnName: ['id', '用户名'],
+      columnName: ['用户名', '角色名'],
       list: null,
       total: 0,
       listLoading: false,
@@ -211,20 +174,12 @@ export default {
       this.total = 1
       this.list = [
         {
-          id: 1,
-          name: 'dfdfdf',
-          code: '15286829800',
-          des: 'tstestst',
-          create_time: '2022/07/18 15:00:23',
-          update_time: '2022/07/18 15:00:23'
+          username: 'admin',
+          rolename: 'admin,normal'
         },
         {
-          id: 2,
-          name: 'xxxxx',
-          code: '15286829800',
-          des: 'tstestst',
-          create_time: '2022/07/18 15:00:23',
-          update_time: '2022/07/18 15:00:23'
+          username: 'test',
+          rolename: 'normal'
         }
       ]
       // fetchList(this.listQuery).then((response) => {

@@ -60,25 +60,31 @@
         label="用户名"
         align="center"
         min-width="100px"
-        prop="name"
+        prop="username"
       >
       </el-table-column>
-      <el-table-column label="电话" prop="id" align="center" min-width="100">
+      <el-table-column label="电话" prop="tel" align="center" min-width="100">
       </el-table-column>
-      <el-table-column label="邮箱" prop="id" align="center" min-width="120">
+      <el-table-column label="邮箱" prop="email" align="center" min-width="120">
       </el-table-column>
-      <el-table-column label="图标" prop="id" align="center" min-width="100">
+      <el-table-column
+        label="图标"
+        prop="avatar"
+        align="center"
+        min-width="100"
+      >
       </el-table-column>
       <el-table-column
         label="描述"
         align="center"
         min-width="100"
+        prop="des"
         class-name="small-padding fixed-width"
       >
       </el-table-column>
       <el-table-column
         label="创建时间"
-        prop="id"
+        prop="create_time"
         sortable="custom"
         align="center"
         min-width="150"
@@ -86,7 +92,7 @@
       </el-table-column>
       <el-table-column
         label="修改时间"
-        prop="id"
+        prop="update_time"
         sortable="custom"
         align="center"
         min-width="150"
@@ -133,20 +139,20 @@
         label-width="70px"
         style="width: 400px; margin-left: 50px"
       >
-        <el-form-item label="用户名" prop="title">
-          <el-input v-model="temp.name" />
+        <el-form-item label="用户名" prop="username">
+          <el-input v-model="temp.username" />
         </el-form-item>
-        <el-form-item label="电话" prop="title">
+        <el-form-item label="电话" prop="tel">
           <el-input v-model="temp.tel" />
         </el-form-item>
-        <el-form-item label="邮箱" prop="title">
+        <el-form-item label="邮箱" prop="email">
           <el-input v-model="temp.email" />
         </el-form-item>
-        <el-form-item label="图标" prop="title">
-          <el-input v-model="temp.avator" />
+        <el-form-item label="图标" prop="avatar">
+          <el-input v-model="temp.avatar" />
         </el-form-item>
-        <el-form-item label="描述" prop="title">
-          <el-input v-model="temp.desc" />
+        <el-form-item label="描述" prop="des">
+          <el-input v-model="temp.des" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -193,7 +199,7 @@ export default {
         tel: 1,
         email: '',
         avtor: '',
-        desc: ''
+        des: ''
       },
       dialogFormVisible: false,
       dialogStatus: '',
@@ -230,8 +236,26 @@ export default {
       this.listLoading = false
       this.total = 1
       this.list = [
-        { id: 1, name: 'dfdfdf' },
-        { id: 2, name: 'dfdfdf' }
+        {
+          id: 1,
+          username: 'dfdfdf',
+          tel: '15286829800',
+          email: '717818895@qq.com',
+          avatar: 'vue',
+          des: 'tstestst',
+          create_time: '2022/07/18 15:00:23',
+          update_time: '2022/07/18 15:00:23'
+        },
+        {
+          id: 2,
+          username: 'xxxxx',
+          tel: '15286829800',
+          email: '717818895@qq.com',
+          avatar: 'vue',
+          des: 'tstestst',
+          create_time: '2022/07/18 15:00:23',
+          update_time: '2022/07/18 15:00:23'
+        }
       ]
       // fetchList(this.listQuery).then((response) => {
       //   this.list = response.data.items
@@ -274,8 +298,8 @@ export default {
         name: undefined,
         tel: 1,
         email: '',
-        avator: 'x',
-        desc: ''
+        avatar: 'x',
+        des: ''
       }
     },
     handleCreate() {
@@ -342,7 +366,7 @@ export default {
     },
     getSortClass: function (key) {
       const sort = this.listQuery.sort
-      return sort === `+${key}` ? 'ascending' : 'descending'
+      return sort === `+${key}` ? 'ascending' : 'desending'
     }
   }
 }
