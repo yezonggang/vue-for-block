@@ -5,24 +5,46 @@ import Layout from '@/layout'
 const tableRouter = {
   path: '/table',
   component: Layout,
-  redirect: '/table/complex-table',
+  //redirect: '/table/complex-table',
   name: 'Table',
   meta: {
-    title: '股票分析一览',
+    roles: ['admin', 'editor'],
+    title: '权限控制',
     icon: 'table'
   },
   children: [
     {
-      path: 'inline-edit-table',
-      component: () => import('@/views/table/basedata-table'),
-      name: 'InlineEditTable',
-      meta: { title: 'Inline Edit' }
+      path: '/lifuer',
+      component: () => import('@/views/table/user-table'),
+      name: 'guess',
+      meta: {
+        roles: ['admin', 'editor'],
+        title: '用户管理',
+        icon: 'form',
+        affix: true
+      }
     },
     {
-      path: 'basedata-table',
-      component: () => import('@/views/table/basedata-table'),
-      name: 'ComplexTable',
-      meta: { title: 'Complex Table' }
+      path: '/BargainHunting',
+      component: () => import('@/views/table/role-table'),
+      name: 'guess',
+      meta: {
+        roles: ['admin', 'editor'],
+        title: '角色管理',
+        icon: 'form',
+        affix: true
+      }
+    },
+    {
+      path: '/BuyingPoint',
+      component: () => import('@/views/table/user-role'),
+      name: 'guess',
+      meta: {
+        roles: ['admin', 'editor'],
+        title: '权限管理',
+        icon: 'form',
+        affix: true
+      }
     }
   ]
 }

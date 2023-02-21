@@ -56,7 +56,7 @@ export const constantRoutes = [
         meta: { title: '主页面板', icon: 'dashboard', affix: true }
       }
     ]
-  },
+  }
   /*   {
     path: '/complextable',
     component: Layout,
@@ -94,36 +94,6 @@ export const constantRoutes = [
       }
     ]
   }*/
-  {
-    path: '/table',
-    component: Layout,
-    //redirect: '/table/complex-table',
-    name: 'Table',
-    meta: {
-      title: '权限控制',
-      icon: 'table'
-    },
-    children: [
-      {
-        path: '/lifuer',
-        component: () => import('@/views/table/user-table'),
-        name: 'guess',
-        meta: { title: '用户管理', icon: 'form', affix: true }
-      },
-      {
-        path: '/BargainHunting',
-        component: () => import('@/views/table/role-table'),
-        name: 'guess',
-        meta: { title: '角色管理', icon: 'form', affix: true }
-      },
-      {
-        path: '/BuyingPoint',
-        component: () => import('@/views/table/user-role'),
-        name: 'guess',
-        meta: { title: '权限管理', icon: 'form', affix: true }
-      }
-    ]
-  }
 ]
 
 /**
@@ -131,6 +101,7 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
+  tableRouter,
   /*   {
     path: '/permission',
     component: Layout,
