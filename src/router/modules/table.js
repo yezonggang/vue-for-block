@@ -5,10 +5,9 @@ import Layout from '@/layout'
 const tableRouter = {
   path: '/table',
   component: Layout,
-  //redirect: '/table/complex-table',
+  redirect: '/table/complex-table',
   name: 'Table',
   meta: {
-    roles: ['admin', 'editor'],
     title: '权限控制',
     icon: 'table'
   },
