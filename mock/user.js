@@ -51,10 +51,10 @@ module.exports = [
   {
     url: '/auth/user/getInfo',
     type: 'get',
-    response: () => {
-      //const { token } = config.query
-      const info = users['admin-token']
-      console.info('----->info:', info)
+    response: (config) => {
+      const { token } = config.query
+      const info = users[token]
+      console.info('----->info:', token, info)
       // mock error
       if (!info) {
         return {
