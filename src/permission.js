@@ -1,6 +1,6 @@
 import router from './router'
 import store from './store'
-import { Message } from 'element-ui'
+import { MessageBox, Message } from 'element-ui'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/utils/auth' // get token from cookie
@@ -49,7 +49,15 @@ router.beforeEach(async (to, from, next) => {
         } catch (error) {
           // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')
-          Message.error(error || 'Has Error')
+          console.log('-----------> no token before')
+          //Message.error(error || 'Has Error')
+          //MessageBox.alert('没有token或过期,请重新登录.')
+          Message({
+            message: '请重新登录',
+            type: 'error',
+            duration: 5 * 1000
+          })
+          console.log('-----------> no token after')
           next(`/login?redirect=${to.path}`)
           NProgress.done()
         }
